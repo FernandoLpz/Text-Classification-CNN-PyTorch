@@ -3,19 +3,17 @@ import nltk
 import numpy as np
 import pandas as pd
 from nltk.tokenize import word_tokenize
+from src.parameters import Parameters
 
 class Preprocessing:
 	
 	def __init__(self):
-		self.data = 'data/tweets.csv'
+		self.data = '../data/tweets.csv'
 		self.vocabulary = None
-		self.x_raw = None
-		self.y = None
-		
 		self.x_tokenized = None
 		self.x_padded = None
-		self.num_words = 2000
-		self.seq_len = 35
+		self.x_raw = None
+		self.y = None
 		
 	def load_data(self):
 		df = pd.read_csv(self.data)
@@ -39,7 +37,7 @@ class Preprocessing:
 	      for word in sentence:
 	         fdist[word] += 1
 	         
-	   common_words = fdist.most_common(self.num_words)
+	   common_words = fdist.most_common(Parameters.num_words)
 	   
 	   for idx, word in enumerate(common_words):
 	      self.vocabulary[word[0]] = idx
@@ -55,22 +53,34 @@ class Preprocessing:
 	      self.x_tokenized.append(temp_sentence)
 	      
 	def padding_sentences(self):
-	   pad_idx = self.num_words + 1
+	   pad_idx = Parameters.num_words + 1
 	   self.x_padded = list()
 	   
 	   for sentence in self.x_tokenized:
-	      while len(sentence) < self.seq_len:
+	      while len(sentence) < Parameters.seq_len:
 	         sentence.insert(len(sentence), pad_idx)
 	      self.x_padded.append(sentence)
 	   
 	   self.x_padded = np.array(self.x_padded)
-	      
-		
-if __name__ == "__main__":
-   prep = Preprocessing()
-   prep.load_data()
-   prep.clean_text()
-   prep.text_tokenization()
-   prep.build_vocabulary()
-   prep.word_to_idx()
-   prep.padding_sentences()
+	   
+class Data:
+   def __init__(self):
+      self.x = None
+      self.y = None
+      self.vocabulary = None
+      
+      self.preprocess_data()
+      
+   def preprocess_data(self):
+   
+      prep = Preprocessing()
+      prep.load_data()
+      prep.clean_text()
+      prep.text_tokenization()
+      prep.build_vocabulary()
+      prep.word_to_idx()
+      prep.padding_sentences()
+      
+      self.x = prep.x_padded
+      self.y = prep.y
+      self.vocabulary = prep.vocabulary
