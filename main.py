@@ -1,23 +1,14 @@
-import numpy as np
-import nltk
-import torch
-import torch.nn as nn
-import torch.optim as optim
-import torch.nn.functional as F
-
-from sklearn.metrics import roc_auc_score
-from sklearn.metrics import accuracy_score
-
-from src import Preprocessing
-from src import TextClassifier
-
-from torch.utils.data import Dataset
-from torch.utils.data import DataLoader
-
 from src import Parameters
-from src import Data
+from src import Preprocessing
 
+class Controller(Parameters, Preprocessing):
+	def __init__(self):
+		super().__init__()
+		print(Parameters.seq_len)
+		print(Preprocessing.data)
 
+if __name__ == '__main__':
+	controller = Controller()
 # class DatasetMaper(Dataset):
 # 	'''
 # 	Handles batches of dataset
@@ -33,20 +24,20 @@ from src import Data
 # 		return self.x[idx], self.y[idx]
 		
 
-class Controller(Data):
-	'''
-	Class for execution. Initializes the preprocessing as well as the 
-	text classifier model
-	'''
+# class Controller(Data):
+# 	'''
+# 	Class for execution. Initializes the preprocessing as well as the 
+# 	text classifier model
+# 	'''
 
-	def __init__(self):
-		super(Data, self).__init__()
-		self.x = Data.x
-		self.y = Data.y
-		self.vocabulary = Data.vocabulary
+# 	def __init__(self):
+# 		super(Data, self).__init__()
+# 		self.x = Data.x
+# 		self.y = Data.y
+# 		self.vocabulary = Data.vocabulary
 		
-		print(self.x.shape)
-		# self.model = TextClassifier()
+# 		print(self.x.shape)
+# 		# self.model = TextClassifier()
 		
 		
 	# def train(self):
