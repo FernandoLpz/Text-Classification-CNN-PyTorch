@@ -2,6 +2,7 @@ import re
 import nltk
 import numpy as np
 import pandas as pd
+from sklearn.model_selection import train_test_split
 from nltk.tokenize import word_tokenize
 # from src.parameters import Parameters
 
@@ -16,6 +17,11 @@ class Preprocessing:
 		self.x_padded = None
 		self.x_raw = None
 		self.y = None
+		
+		self.x_train = None
+		self.x_test = None
+		self.y_train = None
+		self.y_test = None
 		
 	def load_data(self):
 		df = pd.read_csv(self.data)
@@ -64,3 +70,6 @@ class Preprocessing:
 	      self.x_padded.append(sentence)
 	   
 	   self.x_padded = np.array(self.x_padded)
+	   
+	def split_data(self):
+		self.x_train, self.x_test, self.y_train, self.y_test = train_test_split(self.x_padded, self.y, test_size=0.25, random_state=42)

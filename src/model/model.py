@@ -28,27 +28,29 @@ class TextClassifier(nn.ModuleList):
 		self.pool_2 = nn.MaxPool1d(self.kernel_2, self.stride)
 		self.pool_3 = nn.MaxPool1d(self.kernel_3, self.stride)
 		
+		self.fc = nn.Linear(1440, 1)
+		
 		
 	def forward(self, x):
 	
-		print(f"x raw: {x.shape}")
 		x = self.embedding(x)
-		print(f"x embedded: {x.shape}")
 		
 		x1 = self.conv_1(x)
-		print(f"\nx1 convolved: {x1.shape}")
+		x1 = torch.relu(x1)
 		x1 = self.pool_1(x1)
-		print(f"x1 pooled: {x1.shape}")
 		
 		x2 = self.conv_2(x)
-		print(f"\nx2 convolved: {x2.shape}")
+		x2 = torch.relu((x2))
 		x2 = self.pool_2(x2)
-		print(f"x2 pooled: {x2.shape}")
-		
+	
 		x3 = self.conv_3(x)
-		print(f"\nx3 convolved: {x3.shape}")
+		x3 = torch.relu(x3)
 		x3 = self.pool_3(x3)
-		print(f"x3 pooled: {x3.shape}")
 		
-
-		return 1
+		union = torch.cat((x1, x2, x3), 2)
+		union = union.reshape(union.size(0), -1)
+		
+		out = self.fc(union)
+		out = torch.sigmoid(out)
+		
+		return out

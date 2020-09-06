@@ -1,22 +1,62 @@
+import torch
+import torch.optim as optim
+import torch.nn.functional as F
+
 from src import Parameters
 from src import Preprocessing
 from src import TextClassifier
 
-import torch
+from torch.utils.data import Dataset, DataLoader
+
+class DatasetMaper(Dataset):
+
+	def __init__(self, x, y):
+		self.x = x
+		self.y = y
+		
+	def __len__(self):
+		return len(self.x)
+		
+	def __getitem__(self, idx):
+		return self.x[idx], self.y[idx]
+		
 
 class Controller(Parameters):
 	
 	def __init__(self):
 		self.data = self.prepare_data(Parameters.num_words, Parameters.seq_len)
 		self.model = TextClassifier(Parameters)
-		self.train(self.model, self.data['x'], Parameters)
+		self.train(self.model, self.data, Parameters)
 		
 	@staticmethod
-	def train(model, x, params):
-		x = x[0:params.batch_size]
-		x = torch.from_numpy(x)
-		out = model(x)
+	def train(model, data, params):
 	
+		train = DatasetMaper(data['x_train'], data['y_train'])
+		test = DatasetMaper(data['x_test'], data['y_test'])
+		
+		loader_train = DataLoader(train, batch_size=Parameters.batch_size)
+		loader_test = DataLoader(test)
+		
+		optimizer = optim.RMSprop(model.parameters(), lr=Parameters.learning_rate)
+		
+		for epoch in range(Parameters.epochs):
+			predictions = []
+			model.train()
+			for x_batch, y_batch in loader_train:
+				
+				y_pred = model(x_batch)
+				loss = F.binary_cross_entropy(y_pred, y_batch)
+				optimizer.zero_grad()
+				loss.backward()
+				optimizer.step()
+		
+		x = x[0:params.batch_size]
+		y = y[0:params.batch_size]
+		
+		x = torch.from_numpy(x)
+		
+		out = model(x)
+		
 	@staticmethod
 	def prepare_data(num_words, seq_len):
 		pr = Preprocessing(num_words, seq_len)
@@ -26,24 +66,12 @@ class Controller(Parameters):
 		pr.build_vocabulary()
 		pr.word_to_idx()
 		pr.padding_sentences()
-		
-		return {'x': pr.x_padded, 'y': pr.y}
+		pr.split_data()
+
+		return {'x_train': pr.x_train, 'y_train': pr.y_train, 'x_test': pr.x_test, 'y_test': pr.y_test}
 		
 if __name__ == '__main__':
 	controller = Controller()
-# class DatasetMaper(Dataset):
-# 	'''
-# 	Handles batches of dataset
-# 	'''
-# 	def __init__(self, x, y):
-# 		self.x = x
-# 		self.y = y
-		
-# 	def __len__(self):
-# 		return len(self.x)
-		
-# 	def __getitem__(self, idx):
-# 		return self.x[idx], self.y[idx]
 		
 
 # class Controller(Data):
