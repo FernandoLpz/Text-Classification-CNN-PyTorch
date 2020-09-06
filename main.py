@@ -9,6 +9,13 @@ class Controller(Parameters):
 	def __init__(self):
 		self.data = self.prepare_data(Parameters.num_words, Parameters.seq_len)
 		self.model = TextClassifier(Parameters)
+		self.train(self.model, self.data['x'], Parameters)
+		
+	@staticmethod
+	def train(model, x, params):
+		x = x[0:params.batch_size]
+		x = torch.from_numpy(x)
+		out = model(x)
 	
 	@staticmethod
 	def prepare_data(num_words, seq_len):
