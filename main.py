@@ -1,12 +1,27 @@
 from src import Parameters
 from src import Preprocessing
+from src import TextClassifier
 
-class Controller(Parameters, Preprocessing):
+import torch
+
+class Controller(Parameters):
+	
 	def __init__(self):
-		super().__init__()
-		print(Parameters.seq_len)
-		print(Preprocessing.data)
-
+		self.data = self.prepare_data(Parameters.num_words, Parameters.seq_len)
+		self.model = TextClassifier(Parameters)
+	
+	@staticmethod
+	def prepare_data(num_words, seq_len):
+		pr = Preprocessing(num_words, seq_len)
+		pr.load_data()
+		pr.clean_text()
+		pr.text_tokenization()
+		pr.build_vocabulary()
+		pr.word_to_idx()
+		pr.padding_sentences()
+		
+		return {'x': pr.x_padded, 'y': pr.y}
+		
 if __name__ == '__main__':
 	controller = Controller()
 # class DatasetMaper(Dataset):
