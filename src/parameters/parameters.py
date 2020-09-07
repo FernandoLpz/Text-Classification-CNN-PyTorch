@@ -5,7 +5,7 @@ class Parameters:
    seq_len: int = 35
    num_words: int = 2000
    epochs: int = 10
-   batch_size: int = 128
+   batch_size: int = 12
    learning_rate: float = 0.001
    embedding_size: int = 64
    out_size: int = 32

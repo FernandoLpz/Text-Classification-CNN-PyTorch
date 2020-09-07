@@ -20,7 +20,7 @@ class TextClassifier(nn.ModuleList):
 		self.kernel_size = params.kernel_size
 		self.stride = params.stride
 		
-		self.embedding = nn.Embedding(self.num_words, self.embedding_size, padding_idx=0)
+		self.embedding = nn.Embedding(self.num_words + 1, self.embedding_size, padding_idx=0)
 		self.conv_1 = nn.Conv1d(self.seq_len, self.out_size, self.kernel_1, self.stride)
 		self.conv_2 = nn.Conv1d(self.seq_len, self.out_size, self.kernel_2, self.stride)
 		self.conv_3 = nn.Conv1d(self.seq_len, self.out_size, self.kernel_3, self.stride)
@@ -32,12 +32,14 @@ class TextClassifier(nn.ModuleList):
 		
 		
 	def forward(self, x):
-	
+
 		x = self.embedding(x)
-		
+		print(x.shape)
 		x1 = self.conv_1(x)
+		print(x1.shape)
 		x1 = torch.relu(x1)
 		x1 = self.pool_1(x1)
+		print(x1.shape)
 		
 		x2 = self.conv_2(x)
 		x2 = torch.relu((x2))
@@ -49,8 +51,8 @@ class TextClassifier(nn.ModuleList):
 		
 		union = torch.cat((x1, x2, x3), 2)
 		union = union.reshape(union.size(0), -1)
-		
+
 		out = self.fc(union)
 		out = torch.sigmoid(out)
 		
-		return out
+		return out.squeeze()
