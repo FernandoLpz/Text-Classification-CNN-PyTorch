@@ -7,9 +7,8 @@ class Parameters:
    num_words: int = 2000
    
    # Model parameters
-   embedding_size: int = 128
-   out_size: int = 32
-   kernel_size: int = 3
+   embedding_size: int = 64
+   out_size: int = 16
    stride: int = 2
    
    # Training parameters

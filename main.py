@@ -14,7 +14,7 @@ class Controller(Parameters):
 		self.model = TextClassifier(Parameters)
 		
 		# Training - Evaluation pipeline
-		Run().train(model, data, Parameters)
+		Run().train(self.model, self.data, Parameters)
 		
 		
 	@staticmethod
