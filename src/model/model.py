@@ -50,8 +50,10 @@ class TextClassifier(nn.ModuleList):
 	def in_features_fc(self):
 		'''Calculates the number of output features after Convolution + Max pooling
 			
-			Convolved_Features = ((embedding_size + (2 * padding) - dilation * (kernel - 1) - 1) / stride) + 1
-			Pooled_Features = ((embedding_size + (2 * padding) - dilation * (kernel - 1) - 1) / stride) + 1
+		Convolved_Features = ((embedding_size + (2 * padding) - dilation * (kernel - 1) - 1) / stride) + 1
+		Pooled_Features = ((embedding_size + (2 * padding) - dilation * (kernel - 1) - 1) / stride) + 1
+		
+		source: https://pytorch.org/docs/stable/generated/torch.nn.Conv1d.html
 		'''
 		# Calcualte size of convolved/pooled features for convolution_1/max_pooling_1 features
 		out_conv_1 = ((self.embedding_size - 1 * (self.kernel_1 - 1) - 1) / self.stride) + 1
