@@ -14,47 +14,39 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 # Text Classification with CNNs in PyTorch
+The aim of this repository is to show a baseline model for text classification through convolutional neural networks in the PyTorch framework. 
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
-* [About the Project](#about-the-project)
-  * [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Usage](#usage)
-* [Roadmap](#roadmap)
+* [The model](#the-model)
+* [Files](#files)
+  * [Code structure](#code-structure)
+* [How to use](#how-to-use)
+* [License](#licence)
 * [Contributing](#contributing)
-* [License](#license)
 * [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
 
+## 1. The model
+Here I have to write about the model
 
-The aim of this repository is to show a baseline model for text classification through convolutional neural networks in the PyTorch framework. 
+## 2. Files
+Here I have to talk about the files in the repo
 
-## 1. Files
-- The ``data`` directory contains the text which we will work with. 
-- The ``src`` directory contains the file ``model.py``which contains the neural net definition
-- The ``utils`` directory contains helper functions such as the preprocessor and the parser
-- The ``weights`` directory contains the trained weights.
+### 2.1 Code structure
+Here I have to talk about how the classes are connected
 
-## 2. The model
-The architecture of the proposed neural network consists of an embedding layer followed by a Bi-LSTM as well as a LSTM layer. Right after, the latter LSTM is connected to a linear layer. The following image describes the model architecure. 
-<p align="center">
-<img src='img/bilstm_maths.jpg'>
-</p>
+## 3. How to use
+Here I have to talk about how to run the model
 
-## 3. Dependencies
-In order to install the correct versions of each dependency, it is highly suggested to work under a virtual environment. In this case, I'm using the ``pipenv`` environment. To install the dependencies you just need type:
-```
-pipenv install
-```
-then, in order to lauch the environment you would need to type:
-```
-pipenv shell
-```
-## 4. Demo
+## 4. License
+Here I have to introduce the licence
+
+## 5. Contributing
+Here I have to describe the way how to contribute
+
+## 5. Contact
+Here I have to add my social networks
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
