@@ -94,7 +94,7 @@ Feel free to fork the model and add your own suggestiongs.
 If you have any question, feel free to reach me out at:
 * <a href="https://twitter.com/Fernando_LpzV">Twitter</a>
 * <a href="https://medium.com/@fer.neutron">Medium</a>
-* <a href="https://www.linkedin.com/in/fernando-lopezvelasco/>Linkedin</a>
+* <a href="https://www.linkedin.com/in/fernando-lopezvelasco/">Linkedin</a>
 * Email: fer.neutron@gmail.com
 
 ## 6. License
