@@ -31,19 +31,19 @@ The aim of this repository is to show a baseline model for text classification t
 Here I have to write about the model
 
 ## 2. Files
-**Pipfile**: Here you will find the dependencies that the model needs to be run.
+* **Pipfile**: Here you will find the dependencies that the model needs to be run.
 
-**main.py**: It contains the controller of pipelines (preprocessing and trainig)
+* **main.py**: It contains the controller of pipelines (preprocessing and trainig)
 
-**src**: It contains three directories, which are: ``model``, ``parameters`` and ``preprocessing``.
+* **src**: It contains three directories, which are: ``model``, ``parameters`` and ``preprocessing``.
 
-**src/model**: It contains two files, ``model.py`` and ``run.py`` which handles the model definition as well as the training/evaluation phase respectively.
+* **src/model**: It contains two files, ``model.py`` and ``run.py`` which handles the model definition as well as the training/evaluation phase respectively.
 
-**src/parameters**: It contains a ``dataclass`` which stores the parameters used to preprocess the text, define and train the model. 
+* **src/parameters**: It contains a ``dataclass`` which stores the parameters used to preprocess the text, define and train the model. 
 
-**src/preprocessing**: It contains the functions implemented to load, clean and tokenize the text.
+* **src/preprocessing**: It contains the functions implemented to load, clean and tokenize the text.
 
-**data**: It contains the data used to train the depicted model. 
+* **data**: It contains the data used to train the depicted model. 
 
 ### 2.1 Code structure
 Here I have to talk about how the classes are connected
