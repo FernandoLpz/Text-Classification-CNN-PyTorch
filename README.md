@@ -18,7 +18,6 @@ The aim of this repository is to show a baseline model for text classification t
 
 * [The model](#the-model)
 * [Files](#files)
-* [Code structure](#code-structure)
 * [How to use](#how-to-use)
 * [License](#licence)
 * [Contributing](#contributing)
@@ -42,10 +41,7 @@ Here I have to write about the model
 
 * **data**: It contains the data used to train the depicted model. 
 
-## 3 Code structure
-Here I have to talk about how the classes are connected
-
-## 4. How to use
+## 3. How to use
 First you will need to install the dependencies and right after you will need to launch the ``pipenv`` virutal environment. So in order to install the dependices, you have to type:
 
 ```SH
@@ -85,14 +81,24 @@ class Parameters:
    learning_rate: float = 0.001
 ```
 
-## 5. License
+## 4. Contributing
+Feel free to fork the model and add your own suggestiongs.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/YourGreatFeature`)
+3. Commit your Changes (`git commit -m 'Add some YourGreatFeature'`)
+4. Push to the Branch (`git push origin feature/YourGreatFeature`)
+5. Open a Pull Request
+
+## 5. Contact
+If you have any question, feel free to reach me out at:
+* <a href="https://twitter.com/Fernando_LpzV">Twitter</a>
+* <a href="https://medium.com/@fer.neutron">Medium</a>
+* <a href="https://www.linkedin.com/in/fernando-lopezvelasco/>Linkedin</a>
+* Email: fer.neutron@gmail.com
+
+## 6. License
 Here I have to introduce the licence
-
-## 6. Contributing
-Here I have to describe the way how to contribute
-
-## 7. Contact
-Here I have to add my social networks
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
