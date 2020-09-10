@@ -45,19 +45,55 @@ Here I have to write about the model
 
 * **data**: It contains the data used to train the depicted model. 
 
-### 2.1 Code structure
+## 3 Code structure
 Here I have to talk about how the classes are connected
 
-## 3. How to use
-Here I have to talk about how to run the model
+## 4. How to use
+First you will need to install the dependencies and right after you will need to launch the ``pipenv`` virutal environment. So in order to install the dependices, you have to type:
 
-## 4. License
+```SH
+pipenv install
+```
+
+right after you will need to launch the virtual environment such as:
+
+```SH
+pipenv shell
+```
+
+Then, you can execute the prepropcessing and trainig/evaluation pipelines easily, just typing:
+
+```SH
+python main.py
+```
+
+If you want to modify some of the parameters, you can modify the ``dataclass`` which has the following form:
+```PY
+@dataclass
+class Parameters:
+
+   # Preprocessing parameeters
+   seq_len: int = 35
+   num_words: int = 2000
+   
+   # Model parameters
+   embedding_size: int = 64
+   out_size: int = 16
+   stride: int = 2
+   
+   # Training parameters
+   epochs: int = 10
+   batch_size: int = 12
+   learning_rate: float = 0.001
+```
+
+## 5. License
 Here I have to introduce the licence
 
-## 5. Contributing
+## 6. Contributing
 Here I have to describe the way how to contribute
 
-## 5. Contact
+## 7. Contact
 Here I have to add my social networks
 
 
