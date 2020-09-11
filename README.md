@@ -11,7 +11,9 @@
 [![Linkedin][linkedin-shield]][linkedin-url]
 
 # Text Classification with CNNs in PyTorch
-The aim of this repository is to show a baseline model for text classification through convolutional neural networks in the PyTorch framework. 
+The aim of this repository is to show a baseline model for text classification through convolutional neural networks in the PyTorch framework. The architecture implemented in this model was inspired by the one proposed in the paper: <a href="https://arxiv.org/pdf/1408.5882.pdf">Convolutional Neural Networks for Sentence Classification</a>.
+
+If you want to understand the details about how this model was created, take a look at this very clear and detailed explanation: [insert medium link]
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
@@ -19,13 +21,17 @@ The aim of this repository is to show a baseline model for text classification t
 * [The model](#the-model)
 * [Files](#files)
 * [How to use](#how-to-use)
-* [License](#licence)
 * [Contributing](#contributing)
 * [Contact](#contact)
+* [License](#license)
 
+<!-- the-model -->
 ## 1. The model
-Here I have to write about the model
+The architecture of the model is composed of 4 convolutional layers which generate 32 filters each, then each one of these filters is passed through the ``max pooling`` function whose outputs are subsequently cocatenated. Finally, the concatenation is passed through a fully connected layer. The following image describes the model architecture:
 
+[here insert model image]
+
+<!-- files -->
 ## 2. Files
 * **Pipfile**: Here you will find the dependencies that the model needs to be run.
 
@@ -41,6 +47,7 @@ Here I have to write about the model
 
 * **data**: It contains the data used to train the depicted model. 
 
+<!-- how-to-use -->
 ## 3. How to use
 First you will need to install the dependencies and right after you will need to launch the ``pipenv`` virutal environment. So in order to install the dependices, you have to type:
 
@@ -72,7 +79,7 @@ class Parameters:
    
    # Model parameters
    embedding_size: int = 64
-   out_size: int = 16
+   out_size: int = 32
    stride: int = 2
    
    # Training parameters
@@ -80,7 +87,7 @@ class Parameters:
    batch_size: int = 12
    learning_rate: float = 0.001
 ```
-
+<!-- contributing -->
 ## 4. Contributing
 Feel free to fork the model and add your own suggestiongs.
 
@@ -90,6 +97,7 @@ Feel free to fork the model and add your own suggestiongs.
 4. Push to the Branch (`git push origin feature/YourGreatFeature`)
 5. Open a Pull Request
 
+<!-- contact -->
 ## 5. Contact
 If you have any question, feel free to reach me out at:
 * <a href="https://twitter.com/Fernando_LpzV">Twitter</a>
@@ -97,8 +105,9 @@ If you have any question, feel free to reach me out at:
 * <a href="https://www.linkedin.com/in/fernando-lopezvelasco/">Linkedin</a>
 * Email: fer.neutron@gmail.com
 
+<!-- license -->
 ## 6. License
-Here I have to introduce the licence
+Distributed under the MIT License. See ``LICENSE.md`` for more information.
 
 
 <!-- MARKDOWN LINKS & IMAGES -->

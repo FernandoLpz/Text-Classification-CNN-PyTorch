@@ -8,7 +8,7 @@ class Parameters:
    
    # Model parameters
    embedding_size: int = 64
-   out_size: int = 16
+   out_size: int = 32
    stride: int = 2
    
    # Training parameters
