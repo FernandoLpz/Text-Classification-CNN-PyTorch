@@ -29,7 +29,9 @@ If you want to understand the details about how this model was created, take a l
 ## 1. The model
 The architecture of the model is composed of 4 convolutional layers which generate 32 filters each, then each one of these filters is passed through the ``max pooling`` function whose outputs are subsequently cocatenated. Finally, the concatenation is passed through a fully connected layer. The following image describes the model architecture:
 
-[here insert model image]
+<p align="center">
+<img src='img/cnn-text-classification.jpg'>
+</p>
 
 <!-- files -->
 ## 2. Files
