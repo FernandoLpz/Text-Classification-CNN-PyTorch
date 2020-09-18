@@ -13,7 +13,7 @@
 # Text Classification with CNNs in PyTorch
 The aim of this repository is to show a baseline model for text classification through convolutional neural networks in the PyTorch framework. The architecture implemented in this model was inspired by the one proposed in the paper: <a href="https://arxiv.org/pdf/1408.5882.pdf">Convolutional Neural Networks for Sentence Classification</a>.
 
-If you want to understand the details about how this model was created, take a look at this very clear and detailed explanation: [insert medium link]
+If you want to understand the details about how this model was created, take a look at this very clear and detailed explanation: <a href="https://medium.com/@fer.neutron/text-classification-with-cnns-in-pytorch-1113df31e79f?sk=12e7c4b3092297ee0e1c71d659297043"> Text Classification with CNNs in PyTorch </a>
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
