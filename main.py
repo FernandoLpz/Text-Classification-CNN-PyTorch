@@ -4,8 +4,8 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from torch.utils.data import Dataset
 
-from src.preprocessing import Parameters
-from src import LabeledTexts
+from src.parameters import Parameters
+from src.preprocessing import LabeledTexts
 from src import TextClassifier
 
 
@@ -93,7 +93,7 @@ class Controller(Parameters):
                 predictions += list(y_pred.detach().numpy())
 
             # Evaluation phase
-            test_predictions = self.evaluation()
+            test_predictions = self.predict()
 
             # Metrics calculation
             train_accuary = self.calculate_accuracy(self.y_train, predictions)
