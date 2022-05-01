@@ -69,6 +69,21 @@ Then, you can execute the prepropcessing and trainig/evaluation pipelines easily
 python main.py
 ```
 
+Which will output something like this:
+
+```text
+Epoch: 1, loss: 0.54958, Train accuracy: 0.57436, Test accuracy: 0.68382
+Epoch: 2, loss: 0.53202, Train accuracy: 0.65143, Test accuracy: 0.72426
+Epoch: 3, loss: 0.53303, Train accuracy: 0.71519, Test accuracy: 0.71376
+Epoch: 4, loss: 0.40473, Train accuracy: 0.74847, Test accuracy: 0.73057
+Epoch: 5, loss: 0.35461, Train accuracy: 0.78490, Test accuracy: 0.73424
+Epoch: 6, loss: 0.38867, Train accuracy: 0.79821, Test accuracy: 0.74632
+Epoch: 7, loss: 0.26214, Train accuracy: 0.80995, Test accuracy: 0.72794
+Epoch: 8, loss: 0.34084, Train accuracy: 0.81608, Test accuracy: 0.73582
+Epoch: 9, loss: 0.32675, Train accuracy: 0.82834, Test accuracy: 0.72426
+Epoch: 10, loss: 0.39222, Train accuracy: 0.83622, Test accuracy: 0.68487
+```
+
 If you want to modify some of the parameters, you can modify the ``dataclass`` located at ``src/parameters/parameters.py`` which has the following form:
 
 ```PY

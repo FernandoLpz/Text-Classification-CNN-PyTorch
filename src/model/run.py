@@ -67,8 +67,8 @@ class Run:
             test_predictions = Run.evaluation(model, loader_test)
 
             # Metrics calculation
-            train_accuary = Run.calculate_accuray(data['y_train'], predictions)
-            test_accuracy = Run.calculate_accuray(data['y_test'], test_predictions)
+            train_accuary = Run.calculate_accuracy(data['y_train'], predictions)
+            test_accuracy = Run.calculate_accuracy(data['y_test'], test_predictions)
             print("Epoch: %d, loss: %.5f, Train accuracy: %.5f, Test accuracy: %.5f" % (epoch + 1, loss.item(), train_accuary, test_accuracy))
 
     @staticmethod
