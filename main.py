@@ -4,8 +4,8 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 from torch.utils.data import Dataset
 
-from src import Parameters
-from src import Preprocessing
+from src.preprocessing import Parameters
+from src import LabeledTexts
 from src import TextClassifier
 
 
@@ -35,30 +35,31 @@ class Controller(Parameters):
 
     def prepare_data(self):
 
-        # Preprocessing pipeline
-        pr = Preprocessing(self.num_words, self.seq_len)
-        pr.load_data()
-        pr.clean_text()
-        pr.text_tokenization()
-        pr.build_vocabulary()
-        pr.word_to_idx()
-        pr.padding_sentences()
-        pr.split_data()
+        labeled_texts = LabeledTexts(self.num_words, self.seq_len)
 
-        self.x_train = pr.x_train
-        self.y_train = pr.y_train
-        self.x_test = pr.x_test
-        self.y_test = pr.y_test
+        # port to functional programming style with no hidden side-effects
+        labeled_texts.load_data()
+        labeled_texts.clean_text()
+        labeled_texts.text_tokenization()
+        labeled_texts.build_vocabulary()
+        labeled_texts.word_to_idx()
+        labeled_texts.padding_sentences()
+        labeled_texts.split_data()
+
+        self.x_train = labeled_texts.x_train
+        self.y_train = labeled_texts.y_train
+        self.x_test = labeled_texts.x_test
+        self.y_test = labeled_texts.y_test
 
     def train(self):
 
         # Initialize dataset maper
-        self.trainmapper = DatasetMapper(self.x_train, self.y_train)
-        self.testmapper = DatasetMapper(self.x_test, self.y_test)
+        self.trainset_mapper = DatasetMapper(self.x_train, self.y_train)
+        self.testset_mapper = DatasetMapper(self.x_test, self.y_test)
 
         # Initialize loaders
-        self.loader_train = DataLoader(self.trainmapper, batch_size=self.batch_size)
-        self.loader_test = DataLoader(self.testmapper, batch_size=self.batch_size)
+        self.loader_train = DataLoader(self.trainset_mapper, batch_size=self.batch_size)
+        self.loader_test = DataLoader(self.testset_mapper, batch_size=self.batch_size)
 
         # Define optimizer
         optimizer = optim.RMSprop(self.model.parameters(), lr=self.learning_rate)
@@ -99,17 +100,16 @@ class Controller(Parameters):
             test_accuracy = self.calculate_accuracy(self.y_test, test_predictions)
             print("Epoch: %d, loss: %.5f, Train accuracy: %.5f, Test accuracy: %.5f" % (epoch + 1, loss.item(), train_accuary, test_accuracy))
 
-    def evaluation(self):
+    def predict(self):
 
-        # Set the model in evaluation mode
-        self.model.eval()
+        self.model.eval()  # evaluation mode
         predictions = []
 
-        # Starst evaluation phase
         with torch.no_grad():
             for x_batch, y_batch in self.loader_test:
                 y_pred = self.model(x_batch)
                 predictions += list(y_pred.detach().numpy())
+
         return predictions
 
     def calculate_accuracy(self, ground_truth, predictions):

@@ -10,16 +10,16 @@ def word_tokenize(text):
     return re.findall(r'\w+', text)
 
 
-class Preprocessing:
+class LabeledTexts:
 
     def __init__(self, num_words, seq_len):
         self.data = str(DATA_DIR / 'tweets.csv')
         self.num_words = num_words
         self.seq_len = seq_len
         self.vocabulary = None
-        self.x_tokenized = None
+        self.x_idnums = None
         self.x_padded = None
-        self.x_raw = None
+        self.x = None
         self.y = None
 
         self.x_train = None
@@ -28,32 +28,30 @@ class Preprocessing:
         self.y_test = None
 
     def load_data(self):
-        # Reads the raw csv file and split into
-        # sentences (x) and target (y)
-
+        # Reads the raw csv file and split into texts (sentences) (x) and target label (y)
         df = pd.read_csv(self.data)
         df.drop(['id', 'keyword', 'location'], axis=1, inplace=True)
 
-        self.x_raw = df['text'].values
+        self.x = df['text'].values
         self.y = df['target'].values
 
     def clean_text(self):
         # Removes special symbols and just keep
         # words in lower or upper form
 
-        self.x_raw = [x.lower() for x in self.x_raw]
-        self.x_raw = [re.sub(r'[^A-Za-z]+', ' ', x) for x in self.x_raw]
+        self.x = [x.lower() for x in self.x]
+        self.x = [re.sub(r'[^A-Za-z]+', ' ', x) for x in self.x]
 
     def text_tokenization(self):
         # Tokenizes each sentence by implementing the nltk tool
-        self.x_raw = [word_tokenize(x) for x in self.x_raw]
+        self.x = [word_tokenize(x) for x in self.x]
 
     def build_vocabulary(self):
         # Builds the vocabulary and keeps the "x" most frequent words
         self.vocabulary = dict()
         fdist = Counter()
 
-        for sentence in self.x_raw:
+        for sentence in self.x:
             for word in sentence:
                 fdist[word] += 1
 
@@ -66,14 +64,14 @@ class Preprocessing:
         # By using the dictionary (vocabulary), it is transformed
         # each token into its index based representation
 
-        self.x_tokenized = list()
+        self.x_idnums = list()
 
-        for sentence in self.x_raw:
+        for sentence in self.x:
             temp_sentence = list()
             for word in sentence:
                 if word in self.vocabulary.keys():
                     temp_sentence.append(self.vocabulary[word])
-            self.x_tokenized.append(temp_sentence)
+            self.x_idnums.append(temp_sentence)
 
     def padding_sentences(self):
         # Each sentence which does not fulfill the required len
@@ -82,7 +80,7 @@ class Preprocessing:
         pad_idx = 0
         self.x_padded = list()
 
-        for sentence in self.x_tokenized:
+        for sentence in self.x_idnums:
             while len(sentence) < self.seq_len:
                 sentence.insert(len(sentence), pad_idx)
             self.x_padded.append(sentence)
