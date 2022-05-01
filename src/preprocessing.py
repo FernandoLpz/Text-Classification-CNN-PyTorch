@@ -1,9 +1,10 @@
 import re
+from pathlib import Path
 from collections import Counter
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from src.constants import DATA_DIR
+from src.parameters import Parameters
 
 
 def word_tokenize(text):
@@ -12,10 +13,16 @@ def word_tokenize(text):
 
 class LabeledTexts:
 
-    def __init__(self, num_words, seq_len):
-        self.data = str(DATA_DIR / 'tweets.csv')
-        self.num_words = num_words
-        self.seq_len = seq_len
+    def __init__(self, data_filepath='tweets.csv', parameters=Parameters()):
+        self.num_words = parameters.num_words
+        self.seq_len = parameters.seq_len
+        self.data_dir = parameters.data_dir
+        self.parameters = parameters
+
+        self.data_filepath = Path(data_filepath)
+        if not self.data_filepath.is_file():
+            self.data_filepath = self.data_dir / (data_filepath or 'tweets.csv')
+
         self.vocabulary = None
         self.x_idnums = None
         self.x_padded = None
@@ -29,7 +36,7 @@ class LabeledTexts:
 
     def load_data(self):
         # Reads the raw csv file and split into texts (sentences) (x) and target label (y)
-        df = pd.read_csv(self.data)
+        df = pd.read_csv(self.data_filepath.open())
         df.drop(['id', 'keyword', 'location'], axis=1, inplace=True)
 
         self.x = df['text'].values

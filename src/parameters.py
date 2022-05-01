@@ -1,3 +1,4 @@
+from pathlib import Path
 from dataclasses import dataclass
 
 
@@ -15,3 +16,5 @@ class Parameters:
     epochs: int = 10
     batch_size: int = 12
     learning_rate: float = 0.001
+
+    data_dir: Path = Path(__file__).parent.parent / 'data'

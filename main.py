@@ -35,7 +35,7 @@ class Controller(Parameters):
 
     def prepare_data(self):
 
-        labeled_texts = LabeledTexts(self.num_words, self.seq_len)
+        labeled_texts = LabeledTexts(parameters=super())
 
         # port to functional programming style with no hidden side-effects
         labeled_texts.load_data()
